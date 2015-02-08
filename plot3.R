@@ -1,4 +1,4 @@
-plot4 <- function()
+plot3 <- function()
 {
   
   ## Set working directory to path of the file
@@ -22,25 +22,15 @@ plot4 <- function()
                                                format="%Y-%m-%d %H:%M:%S")
   
   ## Open the PNG file for graph creation
-  png("F:/DataScience/ExploratoryAnalysis/ExData_Plotting1/plot4.png")
+  png("F:/DataScience/ExploratoryAnalysis/ExData_Plotting1/plot3.png")
   
-  par(mfrow=c(2,2))
-  
-  ## Plot the histogram
-  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Global_active_power, 
-       type = "l", ylab = "Global Active Power", xlab = "")
-  
-  
-  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Voltage, 
-       type = "l", ylab = "Voltage", xlab = "datetime")
-  
-  
-  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_1, type = "l", ylab = " Energy Sub Metering", xlab = " ")
+ 
+  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_1, type = "l", ylab = " Energy Sub Metering", xlab = "")
   lines(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_2, col = "red")
   lines(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_3, col = "blue")
   legend(x = "topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty = 1, col = c("black", "red", "blue"))
   
-  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Global_reactive_power, type = "l",ylab = "Global Reactive Power", xlab = "datetime")
+ 
   ## Turn off the device
   dev.off()
 
