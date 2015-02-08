@@ -1,0 +1,47 @@
+plot4 <- function()
+{
+  
+  ## Set working directory to path of the file
+  setwd("F:/DataScience/ExploratoryAnalysis/exdata-data-household_power_consumption")
+
+  ## Read the file into powerConsumption
+  powerConsumption = read.table("household_power_consumption.txt", header = TRUE, sep = ";",colClasses = "character")
+
+  ## Convert Date to correct format
+  powerConsumption$Date = as.Date(powerConsumption$Date, "%d/%m/%y%y")
+
+  ## Start and End date for period of observation
+  StartDate = as.Date("2007-02-01")
+  EndDate = as.Date("2007-02-02")
+
+  ## Take sample from 2007-02-01 to 2007-02-02
+  samplePowerConsumption = subset(powerConsumption, 
+                                  powerConsumption$Date >= StartDate & powerConsumption$Date <= EndDate)
+
+  samplePowerConsumption$dateTime = as.POSIXct(paste(samplePowerConsumption$Date, samplePowerConsumption$Time), 
+                                               format="%Y-%m-%d %H:%M:%S")
+  
+  ## Open the PNG file for graph creation
+  png("F:/DataScience/ExploratoryAnalysis/ExData_Plotting1/plot4.png")
+  
+  par(mfrow=c(2,2))
+  
+  ## Plot the histogram
+  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Global_active_power, 
+       type = "l", ylab = "Global Active Power", xlab = "")
+  
+  
+  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Voltage, 
+       type = "l", ylab = "Voltage", xlab = "datetime")
+  
+  
+  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_1, type = "l", ylab = " Sub Metering")
+  lines(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_2, col = "red")
+  lines(samplePowerConsumption$dateTime, samplePowerConsumption$Sub_metering_3, col = "blue")
+  legend(x = "topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty = 1, col = c("black", "red", "blue"))
+  
+  plot(samplePowerConsumption$dateTime, samplePowerConsumption$Global_reactive_power, type = "l",ylab = "Global Active Power", xlab = "datetime")
+  ## Turn off the device
+  dev.off()
+
+}
